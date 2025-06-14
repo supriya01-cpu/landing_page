@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>All-in-One CSS Animations Demo</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    height: 100%;
+    cursor: none; /* hide default cursor */
+  }
+
+  /* -------- Animated Navbar -------- */
+  nav {
+    background: #6200ea;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    user-select: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    user-select: none;
+  }
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: white;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+
+  /* -------- Animated Header Section -------- */
+  header {
+    height: 80vh;
+    background: linear-gradient(135deg, #243baa, #13b948);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    overflow: hidden;
+  }
+  header h1 {
+    font-size: 4rem;
+    margin: 0;
+    animation: fadeInDown 2s ease forwards;
+    user-select: none;
+  }
+  header p {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeInUp 2s 1s ease forwards;
+    user-select: none;
+  }
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* -------- Rotating Gallery -------- */
+  .gallery-container {
+    background: #222;
+    padding: 50px 0 70px;
+    display: flex;
+    justify-content: center;
+  }
+  .gallery {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    perspective: 1000px;
+  }
+  .gallery-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 15s linear infinite;
+  }
+  .gallery-inner img {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 10px #0ed099;
+  }
+  .gallery-inner img:nth-child(1) { transform: rotateY(0deg) translateZ(150px); }
+  .gallery-inner img:nth-child(2) { transform: rotateY(72deg) translateZ(150px); }
+  .gallery-inner img:nth-child(3) { transform: rotateY(144deg) translateZ(150px); }
+  .gallery-inner img:nth-child(4) { transform: rotateY(216deg) translateZ(150px); }
+  .gallery-inner img:nth-child(5) { transform: rotateY(288deg) translateZ(150px); }
+
+  @keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  /* -------- Animated Footer -------- */
+  footer {
+    background: #6200ea;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(90deg, transparent, rgba(124, 60, 164, 0.3), transparent);
+    animation: shine 3s linear infinite;
+  }
+  @keyframes shine {
+    100% { left: 100%; }
+  }
+
+  /* -------- Animated Cursor -------- */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 20px; height: 20px;
+    border: 2px solid #00eac3;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+    z-index: 1000;
+    background: transparent;
+  }
+  .cursor.active {
+    width: 50px;
+    height: 50px;
+    background: rgba(98, 0, 234, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Supriya</div>
+  <ul>
+    <li><a href="#header">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#footer">Contact</a></li>
+  </ul>
+</nav>
+
+<header id="header">
+  <h1>Welcome to Our WebSiya</h1>
+  <h3> Hey i am your host .. you are my dost..</h3>
+  <p>Building beautiful experiences with CSS animations</p>
+</header>
+
+<div class="gallery-container" id="gallery">
+  <div class="gallery">
+    <div class="gallery-inner">
+      <img src="https://picsum.photos/id/1015/100/100" alt="Image 1" />
+      <img src="https://picsum.photos/id/1016/100/100" alt="Image 2" />
+      <img src="https://picsum.photos/id/1018/100/100" alt="Image 3" />
+      <img src="https://picsum.photos/id/1020/100/100" alt="Image 4" />
+      <img src="https://picsum.photos/id/1024/100/100" alt="Image 5" />
+    </div>
+  </div>
+</div>
+<br>
+<p>take it easy and feel free to enjoy this experiences</p>
+<footer id="footer">
+  &copy; 2025 Your Company. All rights reserved.
+</footer>
+
+<div class="cursor" id="cursor"></div>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('active');
+  });
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
